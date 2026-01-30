@@ -7,10 +7,8 @@
     <title>Cyber Solutions | Our Arsenal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom Styles for Glassmorphism & Lift */
         body {
             background-color: #020617;
-            /* Deep Slate Black */
             margin: 0;
             overflow-x: hidden;
         }
@@ -21,7 +19,6 @@
             -webkit-backdrop-filter: blur(12px);
         }
 
-        /* The Custom Elevation Class */
         .cyber-lift {
             transition: all 0.5s ease-out;
             cursor: pointer;
@@ -170,40 +167,38 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        // Custom status codes for the cyber vibe
+        
         const codes = ["200 OK", "404 NOT FOUND", "500 ERROR", "301 REDIRECT", "403 FORBIDDEN", "101 SWITCHING"];
         const fontSize = 14;
-        const columns = Math.floor(canvas.width / 100); // Spread them out more
+        const columns = Math.floor(canvas.width / 100); 
 
-        // Drops start from the bottom
+        
         const drops = [];
         for (let x = 0; x < columns; x++) {
             drops[x] = canvas.height;
         }
 
         function drawMatrix() {
-            // Dark trail effect
+            
             ctx.fillStyle = "rgba(2, 6, 23, 0.1)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            ctx.fillStyle = "#0891b2"; // Cyan-600 color
+            ctx.fillStyle = "#0891b2"; 
             ctx.font = fontSize + "px monospace";
 
             for (let i = 0; i < drops.length; i++) {
                 const text = codes[Math.floor(Math.random() * codes.length)];
 
-                // Drawing text. Spacing is increased for readability
                 ctx.fillText(text, i * 120, drops[i]);
 
-                // Move drop UPWARDS
+ 
                 drops[i] -= fontSize;
 
-                // Reset drop to bottom if it leaves the top
-                if (drops[i] < 0 && Math.random() > 0.95) {
+                 if (drops[i] < 0 && Math.random() > 0.95) {
                     drops[i] = canvas.height;
                 }
             }
-            // Controlled speed using setTimeout
+            
             setTimeout(drawMatrix, 50);
         }
 
@@ -215,5 +210,6 @@
         });
     </script>
 </body>
+
 
 </html>
