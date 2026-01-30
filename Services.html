@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Solutions | Our Arsenal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom Styles for Glassmorphism & Lift */
+        body {
+            background-color: #020617;
+            /* Deep Slate Black */
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .glass {
+            background: rgba(8, 47, 71, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* The Custom Elevation Class */
+        .cyber-lift {
+            transition: all 0.5s ease-out;
+            cursor: pointer;
+        }
+
+        .cyber-lift:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(34, 211, 238, 0.8);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 15px rgba(34, 211, 238, 0.2);
+            background: rgba(8, 47, 71, 0.4);
+        }
+
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="matrix-canvas"></canvas>
+
+    <div class="content-wrapper min-h-screen py-16 px-6">
+        <div class="text-center mb-20">
+            <h1 class="text-5xl font-extrabold text-cyan-400 tracking-[0.3em] uppercase mb-4">Services</h1>
+            <p class="text-green-500 font-mono tracking-widest">[ OFFENSIVE.DEFENSIVE.RESEARCH ]</p>
+            <div class="w-24 h-1 bg-cyan-500 mx-auto mt-4 shadow-[0_0_10px_#06b6d4]"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+
+            <div class="cyber-lift glass border border-slate-800 p-8 rounded-2xl">
+                <div class="text-cyan-500 mb-4 font-mono text-xs">0x01 // OFFENSIVE</div>
+                <h3 class="text-2xl font-bold text-white mb-3">Web/App Pentesting</h3>
+                <ul class="text-slate-400 text-sm space-y-2 list-none">
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Black-box / White-box
+                        Audits</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Business Logic
+                        Vulnerability Scan</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> API Endpoints Security
+                        Testing</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Privilege Escalation Checks
+                    </li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> And A Lot More ....</li>
+                </ul>
+            </div>
+
+            <div class="cyber-lift glass border border-slate-800 p-8 rounded-2xl">
+                <div class="text-cyan-500 mb-4 font-mono text-xs">0x02 // NETWORK</div>
+                <h3 class="text-2xl font-bold text-white mb-3">Infrastructure Audit</h3>
+                <ul class="text-slate-400 text-sm space-y-2 list-none">
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Network Topology Security
+                        Review</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Firewall & IDS/IPS
+                        Configuration</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Wireless Network Pentesting
+                    </li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Port Scanning & Service
+                        Audits</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> And A Lot More ....</li>
+
+                </ul>
+            </div>
+
+            <div class="cyber-lift glass border border-slate-800 p-8 rounded-2xl">
+                <div class="text-cyan-500 mb-4 font-mono text-xs">0x03 // RESEARCH</div>
+                <h3 class="text-2xl font-bold text-white mb-3">Malware Analysis</h3>
+                <ul class="text-slate-400 text-sm space-y-2 list-none">
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Static & Dynamic Code
+                        Analysis</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Behavioral Sandbox Testing
+                    </li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Reverse Engineering of
+                        Binaries</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Signature & Heuristic
+                        Research</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> And A Lot More ....</li>
+
+                </ul>
+            </div>
+
+            <div class="cyber-lift glass border border-slate-800 p-8 rounded-2xl">
+                <div class="text-cyan-500 mb-4 font-mono text-xs">0x04 // OPS</div>
+                <h3 class="text-2xl font-bold text-white mb-3">Red Teaming</h3>
+                <ul class="text-slate-400 text-sm space-y-2 list-none">
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Full-scope Adversarial
+                        Simulation</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Social Engineering &
+                        Phishing</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Physical & Digital Access
+                        Testing</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Persistence & Data
+                        Exfiltration</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> And A Lot More ....</li>
+
+                </ul>
+            </div>
+
+            <div class="cyber-lift glass border border-slate-800 p-8 rounded-2xl">
+                <div class="text-cyan-500 mb-4 font-mono text-xs">0x05 // WEB-SEC</div>
+                <h3 class="text-2xl font-bold text-white mb-3">Website Hardening</h3>
+                <ul class="text-slate-400 text-sm space-y-2 list-none">
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> OWASP Top 10 Mitigation
+                    </li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Custom Secure Middleware
+                        (Node.js)</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> XSS & CSRF Protection</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Rate Limiting & Header
+                        Security</li>
+                </ul>
+            </div>
+
+            <div class="cyber-lift glass border border-slate-800 p-8 rounded-2xl">
+                <div class="text-cyan-500 mb-4 font-mono text-xs">0x06 // DB-SEC</div>
+                <h3 class="text-2xl font-bold text-white mb-3">Database Hardening</h3>
+                <ul class="text-slate-400 text-sm space-y-2 list-none">
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> SQL Injection Prevention
+                    </li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> NoSQL Injection Defense
+                        (MongoDB)</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> At-Rest & In-Transit
+                        Encryption</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✔</span> Principle of Least
+                        Privilege (RBAC)</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Custom status codes for the cyber vibe
+        const codes = ["200 OK", "404 NOT FOUND", "500 ERROR", "301 REDIRECT", "403 FORBIDDEN", "101 SWITCHING"];
+        const fontSize = 14;
+        const columns = Math.floor(canvas.width / 100); // Spread them out more
+
+        // Drops start from the bottom
+        const drops = [];
+        for (let x = 0; x < columns; x++) {
+            drops[x] = canvas.height;
+        }
+
+        function drawMatrix() {
+            // Dark trail effect
+            ctx.fillStyle = "rgba(2, 6, 23, 0.1)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "#0891b2"; // Cyan-600 color
+            ctx.font = fontSize + "px monospace";
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = codes[Math.floor(Math.random() * codes.length)];
+
+                // Drawing text. Spacing is increased for readability
+                ctx.fillText(text, i * 120, drops[i]);
+
+                // Move drop UPWARDS
+                drops[i] -= fontSize;
+
+                // Reset drop to bottom if it leaves the top
+                if (drops[i] < 0 && Math.random() > 0.95) {
+                    drops[i] = canvas.height;
+                }
+            }
+            // Controlled speed using setTimeout
+            setTimeout(drawMatrix, 50);
+        }
+
+        drawMatrix();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+
+</html>

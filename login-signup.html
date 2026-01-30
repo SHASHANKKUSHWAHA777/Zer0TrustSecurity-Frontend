@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZT Sqod | Ultimate Cyber Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #020617; /* Darkest Navy */
+            color: #ffffff;
+            font-family: 'Space Mono', monospace;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        
+        .glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+        }
+
+
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(34, 211, 238, 0.1);
+            position: absolute;
+            top: 0;
+            z-index: 10;
+            animation: scan 4s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scanline"></div>
+
+    <canvas id="matrix-canvas" class="fixed inset-0 opacity-20 pointer-events-none" style="z-index: 1;"></canvas>
+
+    <div id="bg-bruteforce-log" class="fixed inset-0 p-8 text-[10px] text-cyan-500/10 pointer-events-none overflow-hidden select-none leading-tight" style="z-index: 2;"></div>
+
+    <div id="molecule-container" class="fixed inset-0 pointer-events-none" style="z-index: 3;"></div>
+
+    <main class="relative flex items-center justify-center min-h-screen p-6" style="z-index: 50;">
+        
+        <div id="auth-card" class="glass p-8 rounded-2xl w-full max-w-md shadow-[0_0_50px_rgba(6,182,212,0.15)] transition-all duration-300">
+            
+            <div class="text-center mb-8">
+                <div class="inline-block px-3 py-1 border border-cyan-500/50 text-[10px] text-cyan-400 mb-4 tracking-[0.3em] uppercase animate-pulse">
+                    Encrypted Session
+                </div>
+                <h1 id="auth-title" class="text-4xl font-black text-cyan-500 tracking-tighter uppercase italic italic">
+                    Authorize
+                </h1>
+                <p id="auth-subtitle" class="text-[10px] text-slate-500 mt-2 tracking-widest font-mono">BYPASS_FIREWALL_v2.0.4</p>
+            </div>
+
+            <form id="login-form" class="space-y-5">
+                <div class="relative">
+                    <input type="text" required placeholder="GHOST_ID" 
+                           class="w-full bg-black/40 border border-slate-700 rounded-lg p-3.5 text-green-300 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 transition-all font-mono text-sm">
+                </div>
+                
+                <div class="relative">
+                    <input type="password" required placeholder="ACCESS_KEY" 
+                           class="w-full bg-black/40 border border-slate-700 rounded-lg p-3.5 text-green-300 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 transition-all font-mono text-sm">
+                </div>
+
+                <button onclick="load1()" type="submit" class="w-full py-4 bg-cyan-600 hover:bg-cyan-500 text-green-400 font-bold rounded-lg uppercase tracking-[0.2em] transition-all active:scale-95 shadow-lg shadow-cyan-900/40 transition-all duration-500 ease-out
+            hover:-translate-y-2 hover:border-cyan-400/80 
+            hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] 
+            hover:bg-cyan-900/30">
+                    Initialize Link
+                </button>
+            </form>
+
+            <div class="mt-8 pt-6 border-t border-slate-800/50 text-center">
+                <p class="text-[10px] text-slate-500 uppercase tracking-widest">
+                    <span id="toggle-text">New Identity?</span> 
+                    <button id="toggle-auth" class="text-cyan-400 hover:text-white font-bold ml-1 transition-colors underline decoration-dotted">Register Identity</button>
+                </p>
+            </div>
+        </div>
+
+        <div id="runaway-box" class="fixed bottom-10 right-10 glass border border-red-500/30 p-4 rounded-xl cursor-crosshair pointer-events-auto transition-all duration-300 ease-out z-[100] group">
+            <p class="text-[10px] text-red-500 font-bold uppercase animate-pulse">System Admin</p>
+            <p class="text-[9px] text-slate-400">Not reachable</p>
+        </div>
+    </main>
+
+    <script>
+        
+        function load1(){
+            window.location.href= "zertr.html"
+        }
+
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        let columns, drops;
+        const fontSize = 16;
+
+        function initMatrix() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            columns = Math.floor(canvas.width / fontSize);
+            drops = Array(columns).fill(1);
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(2, 6, 23, 0.1)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#22d3ee"; // Cyan
+            ctx.font = fontSize + "px monospace";
+            for (let i = 0; i < drops.length; i++) {
+                const text = Math.random() > 0.5 ? "0" : "1";
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+
+        
+        const bgLog = document.getElementById('bg-bruteforce-log');
+        const paths = ['/admin', '/.env', '/config', '/root', '/api/v1', '/etc/passwd', '/sh', '/bash'];
+        function runScanner() {
+            const div = document.createElement('div');
+            const path = paths[Math.floor(Math.random() * paths.length)];
+            const status = Math.random() > 0.85 ? '<span class="text-cyan-400">200 OK</span>' : '404 NOT_FOUND';
+            div.innerHTML = `[${new Date().toLocaleTimeString()}] INTRUSION_SCAN: ${path.padEnd(12)} ... ${status}`;
+            bgLog.appendChild(div);
+            if (bgLog.childNodes.length > 50) bgLog.removeChild(bgLog.firstChild);
+        }
+
+        
+        const runaway = document.getElementById('runaway-box');
+        runaway.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - runaway.offsetWidth - 40);
+            const y = Math.random() * (window.innerHeight - runaway.offsetHeight - 40);
+            runaway.style.left = `${x}px`;
+            runaway.style.top = `${y}px`;
+            runaway.style.bottom = 'auto';
+            runaway.style.right = 'auto';
+        });
+
+        
+        const toggleBtn = document.getElementById('toggle-auth');
+        const authTitle = document.getElementById('auth-title');
+        const toggleText = document.getElementById('toggle-text');
+        let isLogin = true;
+
+        toggleBtn.onclick = () => {
+            isLogin = !isLogin;
+            authTitle.innerText = isLogin ? "Authorize" : "Register";
+            toggleText.innerText = isLogin ? "New Identity?" : "Known Entity?";
+            toggleBtn.innerText = isLogin ? "Register Identity" : "Login Now";
+        };
+
+        
+        initMatrix();
+        window.onresize = initMatrix;
+
+        function mainLoop() {
+            drawMatrix();
+            if(Math.random() > 0.3) runScanner();
+            requestAnimationFrame(mainLoop);
+        }
+        mainLoop();
+    </script>
+</body>
+</html>

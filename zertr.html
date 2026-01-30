@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero Trust</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <canvas id="matrix-canvas" class="fixed inset-0 -z-20 pointer-events-none"></canvas>
+
+    <style>
+        canvas {
+            display: block;
+        }
+
+        .glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-900 text-white font-sans selection:bg-cyan-500">
+
+    <div id="molecule-canvas" class="fixed inset-0 z-0"></div>
+
+    <main class="relative z-10 p-8 min-h-screen flex flex-col justify-between pointer-events-none">
+
+        <div class="flex justify-between items-start pointer-events-auto">
+            <div class="glass border border-cyan-500/30 p-4 rounded-lg transition-all duration-500 ease-out
+            hover:-translate-y-2 hover:border-cyan-400/80 
+            hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] 
+            hover:bg-cyan-900/30">
+                <h1 class="text-2xl font-bold text-cyan-400 tracking-widest uppercase">Zer0 Trust Security</h1>
+                <p class="text-xs text-slate-400 font-mono mt-1">Status: Scanning Vulnerabilities...</p>
+            </div>
+
+
+            <div class="fixed right-8 top-6 flex flex-col gap-6 z-50">
+                <button class="px-8 py-4 rounded-xl border border-red-500/60
+        bg-red-950/40 backdrop-blur-md
+        text-red-400 font-bold tracking-wider
+        hover:scale-105 hover:border-red-400 hover:text-red-300
+        transition shadow-lg shadow-red-900/40">
+                    THREAT DETECTED
+                    <div class="text-xs text-red-300/80 mt-1">
+                        Port 3306 Exposed
+                    </div>
+                </button>
+
+
+                <a href="About-us.html">
+                    <button class="w-64 py-4 bg-cyan-950/20 backdrop-blur-md border border-cyan-500/50 
+        text-cyan-400 font-bold rounded-lg uppercase tracking-[0.2em] 
+        transition-all duration-300
+        hover:scale-105 hover:text-green-400 hover:border-green-500/80
+        hover:shadow-[0_0_30px_rgba(34,197,94,0.4)]
+        shadow-lg shadow-cyan-900/40">
+                        ABOUT US
+                    </button>
+                </a>
+                
+                <a href="Services.html">
+                    <button class="w-64 py-4 bg-cyan-950/20 backdrop-blur-md border border-cyan-500/50 
+        text-cyan-400 font-bold rounded-lg uppercase tracking-[0.2em] 
+        transition-all duration-300
+        hover:scale-105 hover:text-green-400 hover:border-green-500/80
+        hover:shadow-[0_0_30px_rgba(34,197,94,0.4)]
+        shadow-lg shadow-cyan-900/40">
+                        sERVICES
+                    </button>
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="flex items-center justify-center pointer-events-auto"><button onclick="handleLogin(event)"
+                type="button" id="auth-btn"
+                class="w-64 py-4 bg-transparent backdrop-blur-md border border-cyan-500/50 hover:bg-transparent hover:text-green-400 text-cyan-400 font-bold rounded-lg uppercase tracking-[0.2em] transition-all active:scale-95 shadow-lg shadow-cyan-900/40 transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-[0_0_25px_rgba(34,211,238,0.4)]">
+                Authenticate
+            </button>
+        </div>
+
+
+        <div id="box-container" class="fixed inset-0 pointer-events-none z-50">
+            <div id="runaway-box"
+                class="glass border border-slate-700 p-6 rounded-2xl max-w-sm text-center fixed pointer-events-auto transition-all duration-300 ease-out shadow-2xl bg-slate-900/80 backdrop-blur-md"
+                style="top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 250px;">
+
+                <h2 class="text-xl font-semibold mb-2 text-cyan-400">ZTSqod is here</h2>
+                <p class="text-sm text-slate-400">You Just need to chillax while we defend for you!</p>
+                <p class="text-[10px] mt-3 text-red-500 font-mono tracking-widest animate-pulse">
+                    [ ERROR: UNABLE TO CATCH ]
+                </p>
+            </div>
+
+            <div id="bg-bruteforce-log"
+                class="fixed top-0 left-0 w-full h-full font-mono text-[12px] p-10 overflow-hidden text-cyan-500/20 -z-10 pointer-events-none leading-none select-none">
+            </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 pointer-events-auto ">
+            <div class="glass border border-slate-700 p-4 rounded-lg transition-all duration-500 ease-out
+            hover:-translate-y-2 hover:border-cyan-400/80 
+            hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] 
+            hover:bg-cyan-900/30">
+                <p class="text-xl text-green-500 uppercase font-bold">Core founders</p>
+                <p class="text-lg font-mono text-cyan-300">Shashank Kushwaha <br />Ankit Chandok <br />Aviral Jouhari <br />Ayush Tripathi
+                </p>
+            </div>
+            <div class="glass border border-slate-700 p-4 rounded-lg transition-all duration-500 ease-out
+            hover:-translate-y-2 hover:border-cyan-400/80 
+            hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] 
+            hover:bg-cyan-900/30">
+                <p class="text-xl text-green-500 uppercase font-bold ">Cyber Arsenal</p>
+                <p class="text-lg font-mono text-yellow-400 italic">Hydra Running...</p>
+            </div>
+            <div class="glass border border-slate-700 p-4 rounded-lg transition-all duration-500 ease-out
+            hover:-translate-y-2 hover:border-cyan-400/80 
+            hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] 
+            hover:bg-cyan-900/30">
+                <p class="text-xl text-green-500 uppercase font-bold">Contact Us</p>
+                <p class="text-lg font-mono text-cyan-300">Email: <br />LinkedIn: <br />Instagram: </p>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import * as THREE from 'https://ga.jspm.io/npm:three@0.160.0/build/three.module.js';
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('molecule-canvas').appendChild(renderer.domElement);
+
+
+        const group = new THREE.Group();
+        const positions = [[0, 0, 0], [1.5, 1, 0], [-1.5, 1, 0], [0, -1.5, 1], [1, -1, -1]];
+
+        positions.forEach(pos => {
+            const geometry = new THREE.SphereGeometry(0.5, 32, 32);
+            const material = new THREE.MeshPhongMaterial({
+                color: 0x22d3ee,
+                wireframe: true,
+                emissive: 0x083344
+            });
+            const atom = new THREE.Mesh(geometry, material);
+            atom.position.set(...pos);
+            group.add(atom);
+        });
+
+
+        const lineMaterial = new THREE.LineBasicMaterial({ color: 0x1e293b });
+        scene.add(group);
+
+
+        const light = new THREE.PointLight(0xffffff, 1, 100);
+        light.position.set(10, 10, 10);
+        scene.add(light);
+        scene.add(new THREE.AmbientLight(0x404040));
+
+        camera.position.z = 6;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            group.rotation.y += 0.005;
+            group.rotation.x += 0.002;
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "#0F0";
+            ctx.font = fontSize + "px monospace";
+
+            drops.forEach((y, i) => {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                ctx.fillText(text, i * fontSize, y * fontSize);
+
+                if (y * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            });
+        }
+        setInterval(drawMatrix, 50);
+
+        const box = document.getElementById('runaway-box');
+
+        box.addEventListener('mouseover', () => {
+
+            const maxX = window.innerWidth - box.clientWidth;
+            const maxY = window.innerHeight - box.clientHeight;
+
+
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+
+            box.style.transform = 'none';
+
+
+            box.style.left = `${randomX}px`;
+            box.style.top = `${randomY}px`;
+        });
+
+
+        const bgLogContainer = document.getElementById('bg-bruteforce-log');
+
+
+        const wordlist = [
+            '/admin', '/backup', '/config', '/.env', '/sql', '/phpmyadmin',
+            '/api/v1', '/dev', '/staging', '/logs', '/credentials', '/root',
+            '/shell.php', '/uploads', '/images', '/hidden', '/secret'
+        ];
+
+        function runBgScanner() {
+            setInterval(() => {
+
+                const dir = wordlist[Math.floor(Math.random() * wordlist.length)];
+                const status = Math.random() > 0.85 ? "200 OK" : "404 NOT FOUND";
+                const timestamp = new Date().toLocaleTimeString().split(' ')[0];
+
+
+                const entry = document.createElement('div');
+                entry.className = "mb-1";
+
+
+                const statusStyle = status.includes("200") ? "color: rgba(34, 211, 238, 0.5);" : "";
+
+                entry.innerHTML = `<span>[${timestamp}]</span> <span>SCANNING: 127.0.0.1${dir.padEnd(15)}</span> <span style="${statusStyle}">==> ${status}</span>`;
+
+                bgLogContainer.appendChild(entry);
+
+
+                if (bgLogContainer.childNodes.length > 50) {
+                    bgLogContainer.removeChild(bgLogContainer.firstChild);
+                }
+            }, 80);
+        }
+
+        runBgScanner();
+
+    </script>
+    <script>
+        function handleLogin(event) {
+            const btn = document.getElementById('auth-btn');
+
+
+            btn.innerText = "BYPASSING FIREWALL...";
+            btn.classList.add('animate-pulse');
+            btn.disabled = true;
+
+            setTimeout(() => {
+                alert("ACCESS GRANTED! Redirecting to Dashboard...");
+
+
+                window.location.href = "login-signup.html";
+
+
+                btn.innerText = "AUTHENTICATED";
+                btn.classList.remove('animate-pulse');
+                btn.classList.replace('text-cyan-400', 'text-green-400');
+            }, 200);
+        }
+
+        function loadmain() {
+            window.location.href = "About-us.html"
+        }
+    </script>
+</body>
+
+</html>
